@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="Cadastro de Clientes - Japa Auto Pe&#xe7;as"/>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[600, 600]"/>
+    </Property>
+    <Property name="resizable" type="boolean" value="false"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
+  </Events>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="la_titulo1_dados_empresa" pref="1265" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="la_titulo1_dados_empresa" alignment="0" pref="633" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="la_titulo1_dados_empresa">
+      <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[560, 600]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[560, 600]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[560, 600]"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="this.setLocationRelativeTo(null);"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="la_responsavel_compras" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tf_responsavel_compras" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="la_ramo_atividade" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="com_atividades" pref="140" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="la_data_cadastro" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tf_data_cadastro" min="-2" pref="82" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                          <Component id="la_porcentagem_desconto" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tf_porcentagem_desconto" min="-2" pref="58" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="la_limite_compras" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tf_limite_compras" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="la_id_nextel" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tf_id_nextel" min="-2" pref="100" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="la_email" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tf_email" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="bo_salvar" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="bo_limpar" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+                                          <Component id="bo_cancelar" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="tf_rg" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="la_razao_social" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="tf_razao_social" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="la_cpf" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                          <Component id="tf_cpf" min="-2" pref="101" max="-2" attributes="0"/>
+                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                          <Component id="la_cnpj" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                          <Component id="tf_cnpj" min="-2" pref="110" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" attributes="0">
+                                                          <Component id="la_inscricao_estadual" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                          <Component id="tf_inscricao_estadual" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="la_nome_fantasia1" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="tf_nome_fantasia" max="32767" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="la_nome" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tf_nome" min="-2" pref="182" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="la_dataNascimento" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="tf_dataNascimento" min="-2" pref="69" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="la_rg" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="la_titulo_informacoes" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="la_titulo" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="la_titulo1_dados_contato" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="se_separador3" alignment="0" min="-2" pref="546" max="-2" attributes="0"/>
+                                      <Component id="se_separador4" alignment="0" min="-2" pref="546" max="-2" attributes="0"/>
+                                      <Component id="la_titulo_observacoes" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="sp_painel_rolagem" alignment="0" min="-2" pref="546" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="la_rua" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="tf_rua" max="32767" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="la_numero" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="tf_numero" min="-2" pref="46" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="la_cep" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="tf_cep" min="-2" pref="73" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="la_telefone1" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="tf_telefone1" min="-2" pref="85" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="la_bairro" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="tf_bairro" min="-2" pref="105" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="la_cidade" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="la_telefone2" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="tf_telefone2" min="-2" pref="85" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="la_celular" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="tf_celular" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Component id="se_separador2" alignment="0" min="-2" pref="556" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="477" max="-2" attributes="0"/>
+                                  <Component id="tf_cidade" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="149" max="32767" attributes="0"/>
+                                  <Component id="tf_campo_pesquisa" min="-2" pref="194" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="bo_filtro_nome" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="bo_editar_cliente" alignment="0" pref="300" max="32767" attributes="0"/>
+                                      <Component id="bo_atualizar" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="bo_excluir_cliente" max="32767" attributes="0"/>
+                                      <Component id="bo_consulta_completa" pref="300" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="se_separador1" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="la_titulo" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="se_separador1" min="-2" pref="10" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="bo_filtro_nome" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tf_campo_pesquisa" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="la_nome" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_nome" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_dataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_dataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_rg" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_rg" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="la_cpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_cpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_cnpj" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_cnpj" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_nome_fantasia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_nome_fantasia1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="la_razao_social" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_razao_social" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_inscricao_estadual" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_inscricao_estadual" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="se_separador2" min="-2" pref="10" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="la_titulo1_dados_contato" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="la_rua" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_rua" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_numero" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_numero" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_bairro" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_bairro" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_cidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_cidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="la_cep" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_cep" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_telefone1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_telefone1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_telefone2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_telefone2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_celular" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_celular" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="la_id_nextel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_id_nextel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_email" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_email" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="se_separador3" min="-2" pref="10" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="la_titulo_informacoes" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="la_responsavel_compras" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_responsavel_compras" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_ramo_atividade" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="com_atividades" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="la_data_cadastro" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_data_cadastro" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_porcentagem_desconto" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_porcentagem_desconto" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="la_limite_compras" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_limite_compras" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="se_separador4" min="-2" pref="10" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jScrollPane1" alignment="0" min="-2" pref="354" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="bo_editar_cliente" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="bo_excluir_cliente" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="bo_atualizar" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="bo_consulta_completa" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="la_titulo_observacoes" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="sp_painel_rolagem" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="bo_salvar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="bo_limpar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="bo_cancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="la_titulo">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="16" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Cadastro de Clientes"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSeparator" name="se_separador1">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Dados da empresa"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_nome">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Nome*:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_nome">
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_dataNascimento">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Data de Nascimento:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_dataNascimento">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(maskDataNascimento);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xd;&#xa;    maskDataNascimento = new MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;} catch (Exception e) {&#xd;&#xa;    System.err.println(&quot;Erro ao setar mascara&quot;);&#xd;&#xa;  }"/>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="CadastroCliente_tf_dataNascimento"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_rg">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="RG:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_rg">
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_cpf">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CPF*:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_cpf">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(maskCPF);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xd;&#xa;    maskCPF= new MaskFormatter(&quot;###.###.###-##&quot;);&#xd;&#xa;} catch (Exception e) {&#xd;&#xa;    System.err.println(&quot;Erro ao setar mascara&quot;);&#xd;&#xa;  }"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_cnpj">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CNPJ:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_cnpj">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(maskCNPJ);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xd;&#xa;    maskCNPJ = new MaskFormatter(&quot;##.###.###/####-##&quot;);&#xd;&#xa;} catch (Exception e) {&#xd;&#xa;    System.err.println(&quot;Erro ao setar mascara&quot;);&#xd;&#xa;  }"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_inscricao_estadual">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Inscri&#xe7;&#xe3;o Estadual*:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_nome_fantasia">
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_razao_social">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Raz&#xe3;o Social:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_razao_social">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_razao_socialActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JSeparator" name="se_separador2">
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_titulo1_dados_contato">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Endere&#xe7;o e Contato"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_rua">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Rua:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_rua">
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_numero">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="N&#xfa;mero:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_numero">
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_bairro">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Bairro:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_bairro">
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_cidade">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cidade:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_cidade">
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_cep">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CEP:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_cep">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_cepActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(maskCEP);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="&#xd;&#xa;try {&#xd;&#xa;    maskCEP= new MaskFormatter(&quot;#####-###&quot;);&#xd;&#xa;} catch (Exception e) {&#xd;&#xa;    System.err.println(&quot;Erro ao setar mascara&quot;);&#xd;&#xa;  }"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_telefone1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Telefone1:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_telefone1">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(maskTel1);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xd;&#xa;    maskTel1= new MaskFormatter(&quot;(##)####-####&quot;);&#xd;&#xa;} catch (Exception e) {&#xd;&#xa;    System.err.println(&quot;Erro ao setar mascara&quot;);&#xd;&#xa;  }"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_telefone2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Telefone2:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_telefone2">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_telefone2ActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(maskTel2);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xd;&#xa;    maskTel2= new MaskFormatter(&quot;(##)####-####&quot;);&#xd;&#xa;} catch (Exception e) {&#xd;&#xa;    System.err.println(&quot;Erro ao setar mascara&quot;);&#xd;&#xa;  }"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_celular">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Celular:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_celular">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(maskCel);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xa;    maskCel= new MaskFormatter(&quot;(##)####-####&quot;);&#xa;} catch (Exception e) {&#xa;    System.err.println(&quot;Erro ao setar mascara&quot;);&#xa;}"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_id_nextel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Id Nextel:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_id_nextel">
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_email">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="E-mail:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_email">
+        </Component>
+        <Component class="javax.swing.JSeparator" name="se_separador3">
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_titulo_informacoes">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Informa&#xe7;&#xf5;es"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_responsavel_compras">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Respons&#xe1;vel pelas compras*:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_responsavel_compras">
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_ramo_atividade">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Ramo de Atividades:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="com_atividades">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="5">
+                <StringItem index="0" value="Mec&#xe2;nico"/>
+                <StringItem index="1" value="Empresa"/>
+                <StringItem index="2" value="Auto Pe&#xe7;as"/>
+                <StringItem index="3" value="Eletricista"/>
+                <StringItem index="4" value="Autonomo"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="com_atividadesActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_data_cadastro">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Data de Cadastro*:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_data_cadastro">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_data_cadastroActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(maskDataCadastro);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xd;&#xa;    maskDataCadastro= new MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;} catch (Exception e) {&#xd;&#xa;    System.err.println(&quot;Erro ao setar mascara&quot;);&#xd;&#xa;  }"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_porcentagem_desconto">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Porcentagem de Desconto:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_porcentagem_desconto">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_porcentagem_descontoActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(maskPorcentagem);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="&#xd;&#xa;try {&#xd;&#xa;    maskPorcentagem= new MaskFormatter(&quot;##%&quot;);&#xd;&#xa;} catch (Exception e) {&#xd;&#xa;    System.err.println(&quot;Erro ao setar mascara&quot;);&#xd;&#xa;  }&#xd;&#xa;&#xd;&#xa;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_limite_compras">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Limite de Compras:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_limite_compras">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_limite_comprasActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JSeparator" name="se_separador4">
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_titulo_observacoes">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Observa&#xe7;&#xf5;es:"/>
+          </Properties>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="sp_painel_rolagem">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="ta_observacoes">
+              <Properties>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="rows" type="int" value="5"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="bo_salvar">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Salvar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bo_salvarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="bo_limpar">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Limpar Dados"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bo_limparActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="bo_cancelar">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Cancelar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bo_cancelarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="la_nome_fantasia1">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Nome Fantasia:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_inscricao_estadual">
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="jt_cliente">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="6" rowCount="0">
+                    <Column editable="false" title="C&#xf3;digo" type="java.lang.Integer"/>
+                    <Column editable="false" title="Nome" type="java.lang.String"/>
+                    <Column editable="false" title="CNPJ" type="java.lang.String"/>
+                    <Column editable="false" title="Nome Fantasia" type="java.lang.String"/>
+                    <Column editable="false" title="Cidade" type="java.lang.String"/>
+                    <Column editable="false" title="Respons&#xe1;vel" type="java.lang.String"/>
+                  </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="1">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
+                </Property>
+                <Property name="columnSelectionAllowed" type="boolean" value="true"/>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Consulta Resumida de Clientes:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="bo_editar_cliente">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Editar Cliente Selecionado"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="bo_atualizar">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Atualizar Tabela"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="bo_consulta_completa">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Consultar Todos os Dados do Cliente"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bo_consulta_completaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="bo_excluir_cliente">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Excluir Registro"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bo_excluir_clienteActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="bo_filtro_nome">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Filtrar por Nome"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tf_campo_pesquisa">
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
