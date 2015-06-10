@@ -37,8 +37,8 @@ public class AcessoBD {
 
     private void ConfigBD(String nomeBD, String user, String password) {
             String driver = "com.mysql.jdbc.Driver",
-            URL = "jdbc:mysql://192.168.124/" + nomeBD;
-            //URL = "jdbc:mysql://192.168.0.2/" + nomeBD;
+            //   ---> IP do Servidor   URL = "jdbc:mysql://192.168.124/" + nomeBD;
+            URL = "jdbc:mysql://localhost/" + nomeBD;
 
         //setar o driver
         try {
