@@ -36,6 +36,12 @@ public final class CadastroCliente extends javax.swing.JFrame {
         listarClientes();
         tf_numero.setText(""+0);
         tf_limite_compras.setText(""+0);
+        jt_cliente.getColumnModel().getColumn(0).setPreferredWidth(90);  //Coluna Código
+        jt_cliente.getColumnModel().getColumn(1).setPreferredWidth(200);  //Coluna Nome
+        jt_cliente.getColumnModel().getColumn(2).setPreferredWidth(230);  //Coluna CNPJ
+        jt_cliente.getColumnModel().getColumn(3).setPreferredWidth(180);  //Coluna Nome Fantasia
+        jt_cliente.getColumnModel().getColumn(4).setPreferredWidth(220);  //Coluna Cidade
+        jt_cliente.getColumnModel().getColumn(5).setPreferredWidth(180);  //Coluna Responsável
     }
 
 
@@ -376,7 +382,7 @@ public final class CadastroCliente extends javax.swing.JFrame {
         });
 
         bo_consulta_completa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        bo_consulta_completa.setText("Consultar Todos os Dados do Cliente");
+        bo_consulta_completa.setText("Consulta Completa Clientes");
         bo_consulta_completa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bo_consulta_completaActionPerformed(evt);
@@ -399,7 +405,10 @@ public final class CadastroCliente extends javax.swing.JFrame {
         la_titulo1_dados_empresaLayout.setHorizontalGroup(
             la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, la_titulo1_dados_empresaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(se_separador1))
                     .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
                         .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
@@ -433,12 +442,6 @@ public final class CadastroCliente extends javax.swing.JFrame {
                                         .addComponent(la_email)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tf_email))
-                                    .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                        .addComponent(bo_salvar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(bo_limpar)
-                                        .addGap(113, 113, 113)
-                                        .addComponent(bo_cancelar))
                                     .addComponent(la_titulo_informacoes)
                                     .addComponent(la_titulo)
                                     .addComponent(jLabel1)
@@ -446,7 +449,6 @@ public final class CadastroCliente extends javax.swing.JFrame {
                                     .addComponent(se_separador3, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(se_separador4, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(la_titulo_observacoes)
-                                    .addComponent(sp_painel_rolagem, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
                                         .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
@@ -520,32 +522,40 @@ public final class CadastroCliente extends javax.swing.JFrame {
                                                         .addComponent(la_nome_fantasia1)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                         .addComponent(tf_nome_fantasia)))))
-                                        .addGap(1, 1, 1))))
+                                        .addGap(1, 1, 1))
+                                    .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(sp_painel_rolagem, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                            .addComponent(bo_salvar)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(bo_cancelar, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                    .addComponent(bo_limpar)
+                                                    .addGap(196, 196, 196)))))))
                             .addComponent(se_separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
                                 .addGap(477, 477, 477)
                                 .addComponent(tf_cidade)))
                         .addGap(18, 18, 18)
-                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
+                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tf_campo_pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(bo_filtro_nome))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                                .addComponent(tf_campo_pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bo_filtro_nome))
-                            .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(bo_editar_cliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                    .addComponent(bo_atualizar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bo_atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bo_editar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(110, 110, 110)
                                 .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(bo_excluir_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(bo_consulta_completa, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)))))
-                    .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(se_separador1)))
-                .addContainerGap())
+                                    .addComponent(bo_consulta_completa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         la_titulo1_dados_empresaLayout.setVerticalGroup(
             la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -562,6 +572,7 @@ public final class CadastroCliente extends javax.swing.JFrame {
                     .addComponent(tf_campo_pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
                         .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(la_nome)
@@ -632,24 +643,23 @@ public final class CadastroCliente extends javax.swing.JFrame {
                             .addComponent(tf_porcentagem_desconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(la_limite_compras)
                             .addComponent(tf_limite_compras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(se_separador4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bo_editar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bo_excluir_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bo_atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bo_consulta_completa, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(se_separador4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(la_titulo_observacoes)
+                .addGap(2, 2, 2)
+                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                        .addComponent(la_titulo_observacoes)
+                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bo_excluir_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bo_editar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(bo_consulta_completa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bo_atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                        .addComponent(sp_painel_rolagem, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sp_painel_rolagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bo_salvar)
                             .addComponent(bo_limpar)
@@ -661,13 +671,11 @@ public final class CadastroCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(la_titulo1_dados_empresa, javax.swing.GroupLayout.DEFAULT_SIZE, 1265, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(la_titulo1_dados_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, 1102, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(la_titulo1_dados_empresa, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+            .addComponent(la_titulo1_dados_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         this.setLocationRelativeTo(null);
@@ -753,6 +761,7 @@ public final class CadastroCliente extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jt_cliente.getModel();
                
         modelo.removeRow(jt_cliente.getSelectedRow());
+        listarClientes();
         
     }//GEN-LAST:event_bo_excluir_clienteActionPerformed
 
@@ -1048,6 +1057,9 @@ public final class CadastroCliente extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null, "Erro ao listar a tabela " + erro);
         }
+        
+        
+        
     }
     
     // Limpa tabela antes de listar todos os clientes
