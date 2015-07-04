@@ -12,13 +12,17 @@ import java.net.URL;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
  * @author Henrique
  */
 public final class EdicaoCliente extends javax.swing.JFrame {
-
+    
+    MaskFormatter maskCNPJ;
+    
     /**
      * Creates new form EdicaoPatio
      */
@@ -57,7 +61,12 @@ public final class EdicaoCliente extends javax.swing.JFrame {
         tf_codigo = new javax.swing.JTextField();
         bo_salvar = new javax.swing.JButton();
         la_principal = new javax.swing.JLabel();
-        tf_cnpj = new javax.swing.JTextField();
+        try {      
+            maskCNPJ = new MaskFormatter("##.###.###/####-##");
+        } catch (Exception e) {      
+            System.err.println("Erro ao setar mascara");    
+        }
+        tf_cnpj = new JFormattedTextField(maskCNPJ);
         la_rg = new javax.swing.JLabel();
         tf_nome_fantasia = new javax.swing.JTextField();
         la_cpf = new javax.swing.JLabel();
@@ -304,11 +313,8 @@ public final class EdicaoCliente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new EdicaoCliente().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new EdicaoCliente().setVisible(true);
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,15 +1,23 @@
 package Cadastro;
 
+import Auxiliar.data;
+import Conexao.AcessoBD;
 import Gerenciamento.TelaInicial;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -18,15 +26,24 @@ import javax.swing.UnsupportedLookAndFeelException;
 public final class CadastroFornecedor extends javax.swing.JFrame {
 
     String seta_look = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
-    
-    
+    AcessoBD database = new AcessoBD("japa");
+    data d = new data();
+    String [] estados = {"AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RR","SC","SE","SP","TO"};
+    MaskFormatter maskCNPJ, maskCEP,maskTel1, maskTel2, maskCel;
     public CadastroFornecedor() throws ClassNotFoundException {
         initComponents();
         lookandfeel();
         setarIcone();
         setLocationRelativeTo(null);
         lookandfeel();
+        setEstados();
+        listarFornecedores();
         
+        tf_numero.setText(""+0);
+        
+        d.le_data();
+        String formato_data = d.getDia() + "/" + d.getMesNumber() + "/" + d.getAno();
+        tf_data_cadastro.setText(formato_data);
         
     }
 
@@ -52,7 +69,8 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
         la_razao_social = new javax.swing.JLabel();
         tf_razao_social = new javax.swing.JTextField();
         la_cnpj = new javax.swing.JLabel();
-        tf_cnpj = new javax.swing.JTextField();
+        try {      maskCNPJ = new MaskFormatter("##.###.###/####-##");  } catch (Exception e) {      System.err.println("Erro ao setar mascara");    }
+        tf_cnpj = new JFormattedTextField(maskCNPJ);
         la_inscricao_estadual = new javax.swing.JLabel();
         tf_inscricao_estadual = new javax.swing.JTextField();
         se_separador2 = new javax.swing.JSeparator();
@@ -66,19 +84,23 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
         la_cidade = new javax.swing.JLabel();
         tf_cidade = new javax.swing.JTextField();
         la_cep = new javax.swing.JLabel();
-        tf_cep = new javax.swing.JTextField();
+        try {      maskCEP= new MaskFormatter("#####-###");  } catch (Exception e) {      System.err.println("Erro ao setar mascara");    }
+        tf_cep = new JFormattedTextField(maskCEP);
         la_telefone1 = new javax.swing.JLabel();
-        tf_telefone1 = new javax.swing.JTextField();
+        try {      maskTel1= new MaskFormatter("(##)####-####");  } catch (Exception e) {      System.err.println("Erro ao setar mascara");    }
+        tf_telefone1 = new JFormattedTextField(maskTel1);
         la_telefone2 = new javax.swing.JLabel();
-        tf_telefone2 = new javax.swing.JTextField();
+        try {      maskTel2= new MaskFormatter("(##)####-####");  } catch (Exception e) {      System.err.println("Erro ao setar mascara");    }
+        tf_telefone2 = new JFormattedTextField(maskTel2);
         la_celular = new javax.swing.JLabel();
-        tf_celular = new javax.swing.JTextField();
+        try {     maskCel= new MaskFormatter("(##)####-####"); } catch (Exception e) {     System.err.println("Erro ao setar mascara"); }
+        tf_celular = new JFormattedTextField(maskCel);
         la_id_nextel = new javax.swing.JLabel();
         tf_id_nextel = new javax.swing.JTextField();
         la_email = new javax.swing.JLabel();
         tf_email = new javax.swing.JTextField();
         la_celular1 = new javax.swing.JLabel();
-        tf_celular1 = new javax.swing.JTextField();
+        tf_data_cadastro = new javax.swing.JTextField();
         se_separador3 = new javax.swing.JSeparator();
         la_titulo_dados_bancarios = new javax.swing.JLabel();
         la_banco1 = new javax.swing.JLabel();
@@ -116,7 +138,7 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
         bo_limpar = new javax.swing.JButton();
         bo_cancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jt_fornecedor = new javax.swing.JTable();
         la_nome_titulo_empresa1 = new javax.swing.JLabel();
         bo_filtro_nome = new javax.swing.JButton();
         tf_campo_pesquisa = new javax.swing.JTextField();
@@ -124,6 +146,8 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
         bo_editar_cliente1 = new javax.swing.JButton();
         bo_excluir_cliente1 = new javax.swing.JButton();
         bo_consulta_completa1 = new javax.swing.JButton();
+        la_ramo_atividade = new javax.swing.JLabel();
+        com_estados = new javax.swing.JComboBox();
 
         bo_atualizar.setBackground(new java.awt.Color(0, 0, 204));
         bo_atualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -152,6 +176,7 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Fornecedores - Japa Auto Peças");
+        setFocusCycleRoot(false);
         setMinimumSize(new java.awt.Dimension(600, 600));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -160,6 +185,7 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
             }
         });
 
+        la_titulo1_dados_empresa.setFocusCycleRoot(true);
         la_titulo1_dados_empresa.setMaximumSize(new java.awt.Dimension(560, 600));
         la_titulo1_dados_empresa.setMinimumSize(new java.awt.Dimension(560, 600));
         la_titulo1_dados_empresa.setPreferredSize(new java.awt.Dimension(560, 600));
@@ -219,6 +245,12 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
 
         la_celular1.setText("Data de Cadastro:");
 
+        tf_data_cadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_data_cadastroActionPerformed(evt);
+            }
+        });
+
         la_titulo_dados_bancarios.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         la_titulo_dados_bancarios.setText("Dados Bancários");
 
@@ -263,7 +295,7 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
         la_observacoes.setText("Observações:");
 
         ta_observacoes.setColumns(20);
-        ta_observacoes.setRows(5);
+        ta_observacoes.setRows(4);
         sp_painel_rolagem.setViewportView(ta_observacoes);
 
         bo_salvar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -293,18 +325,21 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jt_fornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nome Fantasia", "CNPJ", "Inscrição Est.", "Telefone Emp.", "Vendedor", "Telefone Ven."
+                "Codigo", "Nome Fantasia", "CNPJ", "Inscrição Est.", "Telefone Emp.", "Vendedor", "Telefone Ven."
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jt_fornecedor);
+        if (jt_fornecedor.getColumnModel().getColumnCount() > 0) {
+            jt_fornecedor.getColumnModel().getColumn(0).setPreferredWidth(20);
+        }
 
         la_nome_titulo_empresa1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         la_nome_titulo_empresa1.setText("Consulta Resumida");
@@ -322,6 +357,11 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
         bo_atualizar1.setMaximumSize(new java.awt.Dimension(259, 23));
         bo_atualizar1.setMinimumSize(new java.awt.Dimension(259, 23));
         bo_atualizar1.setPreferredSize(new java.awt.Dimension(259, 23));
+        bo_atualizar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bo_atualizar1ActionPerformed(evt);
+            }
+        });
 
         bo_editar_cliente1.setBackground(new java.awt.Color(255, 255, 0));
         bo_editar_cliente1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -347,6 +387,16 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
             }
         });
 
+        la_ramo_atividade.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        la_ramo_atividade.setText("Estado");
+
+        com_estados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { null }));
+        com_estados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                com_estadosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout la_titulo1_dados_empresaLayout = new javax.swing.GroupLayout(la_titulo1_dados_empresa);
         la_titulo1_dados_empresa.setLayout(la_titulo1_dados_empresaLayout);
         la_titulo1_dados_empresaLayout.setHorizontalGroup(
@@ -358,160 +408,171 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
                     .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
                         .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                .addComponent(la_titulo1_dados_vendedor)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                .addComponent(la_nome_vendedor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_nome_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(la_id_nextel_vendedor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_id_nextel_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(la_telefone_vendedor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tf_telefone_vendedor))
-                            .addComponent(se_separador4)
-                            .addComponent(se_separador3)
+                                .addComponent(bo_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bo_limpar)
+                                .addGap(109, 109, 109)
+                                .addComponent(bo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                .addGap(0, 8, Short.MAX_VALUE)
                                 .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(la_nome_fantasia)
-                                    .addComponent(la_cnpj))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tf_nome_fantasia, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                    .addComponent(tf_cnpj))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(la_razao_social)
-                                    .addComponent(la_inscricao_estadual))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tf_inscricao_estadual)
-                                    .addComponent(tf_razao_social)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(se_separador2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(la_titulo_dados_bancarios, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(la_titulo, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                        .addComponent(la_id_nextel)
+                                    .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(la_observacoes)
+                                            .addComponent(la_email_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(32, 32, 32)
+                                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tf_email_vendedor)
+                                            .addComponent(sp_painel_rolagem)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                        .addComponent(la_nome_vendedor)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tf_id_nextel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(la_email)
+                                        .addComponent(tf_nome_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(la_id_nextel_vendedor)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(la_celular1)
+                                        .addComponent(tf_id_nextel_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(la_telefone_vendedor)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(tf_telefone_vendedor))
+                                    .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(la_nome_fantasia)
+                                            .addComponent(la_cnpj))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tf_celular1))
-                                    .addComponent(la_nome_titulo_empresa, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                                .addComponent(la_rua)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(tf_rua, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(la_numero)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tf_numero, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                                .addComponent(la_cep)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(tf_cep, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(la_telefone1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tf_telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(14, 14, 14)))
+                                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tf_nome_fantasia, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                                            .addComponent(tf_cnpj))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(la_razao_social)
+                                            .addComponent(la_inscricao_estadual))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tf_inscricao_estadual)
+                                            .addComponent(tf_razao_social)))
+                                    .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(se_separador3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(se_separador2)
+                                                .addComponent(la_titulo)
+                                                .addComponent(la_nome_titulo_empresa)
+                                                .addComponent(la_titulo1_dados_endereco_empresa)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                    .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                            .addComponent(la_banco1)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(tf_banco1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                            .addComponent(la_banco2)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(tf_banco2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                            .addComponent(la_banco3)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(tf_banco3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(la_titulo_dados_bancarios))
+                                                    .addGap(28, 28, 28)
+                                                    .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                            .addComponent(la_agencia1)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                            .addComponent(tf_agencia1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                            .addComponent(la_agencia2)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                            .addComponent(tf_agencia2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                            .addComponent(la_agencia3)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                            .addComponent(tf_agencia3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                            .addComponent(la_conta_corrente1)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                            .addComponent(tf_conta_corrente1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                            .addComponent(la_conta_corrente2)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                            .addComponent(tf_conta_corrente2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                            .addComponent(la_conta_corrente3)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                            .addComponent(tf_conta_corrente3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(se_separador4, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                    .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                            .addComponent(la_rua)
+                                                            .addGap(12, 12, 12)
+                                                            .addComponent(tf_rua))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                            .addComponent(la_id_nextel)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(tf_id_nextel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                                    .addComponent(la_telefone1)
+                                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                    .addComponent(tf_telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                                    .addComponent(la_cidade)
+                                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                    .addComponent(tf_cidade, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                            .addGap(14, 14, 14)
+                                                            .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                                    .addComponent(la_cep)
+                                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                    .addComponent(tf_cep, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                                    .addComponent(la_telefone2)
+                                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                    .addComponent(tf_telefone2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                            .addComponent(la_celular)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(tf_celular)
+                                                            .addGap(4, 4, 4))
+                                                        .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                            .addComponent(la_numero)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(tf_numero, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGap(0, 0, Short.MAX_VALUE))))
+                                                .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
+                                                    .addComponent(la_celular1)
+                                                    .addGap(2, 2, 2)
+                                                    .addComponent(tf_data_cadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(la_email)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(4, 4, 4)))
+                                            .addComponent(la_titulo1_dados_vendedor)
                                             .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
                                                 .addComponent(la_bairro)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(tf_bairro, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(la_ramo_atividade)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(la_cidade)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tf_cidade, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                                            .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                                .addComponent(la_telefone2)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tf_telefone2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(la_celular)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tf_celular))))
-                                    .addComponent(la_titulo1_dados_endereco_empresa, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                                .addComponent(la_banco1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tf_banco1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                                .addComponent(la_banco2)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tf_banco2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                                .addComponent(la_banco3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tf_banco3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(28, 28, 28)
-                                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                                .addComponent(la_agencia1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(tf_agencia1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                                .addComponent(la_agencia2)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(tf_agencia2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                                .addComponent(la_agencia3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(tf_agencia3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                                .addComponent(la_conta_corrente1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(tf_conta_corrente1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                                .addComponent(la_conta_corrente2)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(tf_conta_corrente2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                                .addComponent(la_conta_corrente3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(tf_conta_corrente3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                            .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(la_email_vendedor)
-                                    .addComponent(la_observacoes))
-                                .addGap(32, 32, 32)
-                                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tf_email_vendedor)
-                                    .addComponent(sp_painel_rolagem)))
-                            .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                .addComponent(bo_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(117, 117, 117)
-                                .addComponent(bo_limpar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                                                .addComponent(com_estados, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(4, 4, 4)))
+                                        .addGap(0, 1, Short.MAX_VALUE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
                                 .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(bo_editar_cliente1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                                     .addComponent(bo_atualizar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                                 .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(bo_excluir_cliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(bo_consulta_completa1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)))
@@ -560,30 +621,34 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
                             .addComponent(la_rua)
                             .addComponent(tf_rua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(la_numero)
-                            .addComponent(tf_numero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(la_bairro)
-                            .addComponent(tf_bairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(la_cidade)
-                            .addComponent(tf_cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tf_numero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(la_cep)
                             .addComponent(tf_cep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(la_cidade)
+                            .addComponent(tf_cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(la_bairro)
+                            .addComponent(tf_bairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(la_ramo_atividade)
+                            .addComponent(com_estados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(la_id_nextel)
+                            .addComponent(tf_id_nextel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(la_telefone1)
                             .addComponent(tf_telefone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(la_telefone2)
                             .addComponent(tf_telefone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(la_celular)
                             .addComponent(tf_celular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(8, 8, 8)
                         .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(la_id_nextel)
-                            .addComponent(tf_id_nextel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_data_cadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(la_celular1)
                             .addComponent(la_email)
-                            .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_celular1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(la_celular1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                            .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(se_separador3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(la_titulo_dados_bancarios)
@@ -611,9 +676,9 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
                             .addComponent(la_agencia3)
                             .addComponent(tf_agencia3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_conta_corrente3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
-                        .addComponent(se_separador4, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(se_separador4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(la_titulo1_dados_vendedor)
                         .addGap(18, 18, 18)
                         .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -629,7 +694,7 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
                             .addComponent(tf_email_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
                         .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bo_editar_cliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -641,13 +706,13 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
                     .addGroup(la_titulo1_dados_empresaLayout.createSequentialGroup()
                         .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(la_observacoes)
-                            .addComponent(sp_painel_rolagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(sp_painel_rolagem, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(la_titulo1_dados_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bo_salvar)
                             .addComponent(bo_limpar)
                             .addComponent(bo_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(23, 23, 23))
+                .addGap(44, 44, 44))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -659,7 +724,7 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(la_titulo1_dados_empresa, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
+                .addComponent(la_titulo1_dados_empresa, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -678,11 +743,11 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_bo_cancelarActionPerformed
 
     private void bo_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bo_limparActionPerformed
-
+        limparCampos();
     }//GEN-LAST:event_bo_limparActionPerformed
 
     private void bo_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bo_salvarActionPerformed
-
+        checarCampos();
     }//GEN-LAST:event_bo_salvarActionPerformed
 
     private void tf_cepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_cepActionPerformed
@@ -717,12 +782,32 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_bo_consulta_completaActionPerformed
 
     private void bo_excluir_cliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bo_excluir_cliente1ActionPerformed
-        // TODO add your handling code here:
+        int codigo = (int) jt_fornecedor.getModel().getValueAt(jt_fornecedor.getSelectedRow() ,0);
+        
+        
+        excluirFornecedor(codigo);
+        
+        DefaultTableModel modelo = (DefaultTableModel) jt_fornecedor.getModel();
+               
+        modelo.removeRow(jt_fornecedor.getSelectedRow());
     }//GEN-LAST:event_bo_excluir_cliente1ActionPerformed
 
     private void bo_consulta_completa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bo_consulta_completa1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bo_consulta_completa1ActionPerformed
+
+    private void tf_data_cadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_data_cadastroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_data_cadastroActionPerformed
+
+    private void com_estadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_com_estadosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_com_estadosActionPerformed
+
+    private void bo_atualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bo_atualizar1ActionPerformed
+        limpaTabela();
+        listarFornecedores();
+    }//GEN-LAST:event_bo_atualizar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -771,8 +856,9 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
     private javax.swing.JButton bo_filtro_nome;
     private javax.swing.JButton bo_limpar;
     private javax.swing.JButton bo_salvar;
+    private javax.swing.JComboBox com_estados;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jt_fornecedor;
     private javax.swing.JLabel la_agencia1;
     private javax.swing.JLabel la_agencia2;
     private javax.swing.JLabel la_agencia3;
@@ -799,6 +885,7 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
     private javax.swing.JLabel la_nome_vendedor;
     private javax.swing.JLabel la_numero;
     private javax.swing.JLabel la_observacoes;
+    private javax.swing.JLabel la_ramo_atividade;
     private javax.swing.JLabel la_razao_social;
     private javax.swing.JLabel la_rua;
     private javax.swing.JLabel la_telefone1;
@@ -824,13 +911,13 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
     private javax.swing.JTextField tf_banco3;
     private javax.swing.JTextField tf_campo_pesquisa;
     private javax.swing.JTextField tf_celular;
-    private javax.swing.JTextField tf_celular1;
     private javax.swing.JTextField tf_cep;
     private javax.swing.JTextField tf_cidade;
     private javax.swing.JTextField tf_cnpj;
     private javax.swing.JTextField tf_conta_corrente1;
     private javax.swing.JTextField tf_conta_corrente2;
     private javax.swing.JTextField tf_conta_corrente3;
+    private javax.swing.JTextField tf_data_cadastro;
     private javax.swing.JTextField tf_email;
     private javax.swing.JTextField tf_email_vendedor;
     private javax.swing.JTextField tf_id_nextel;
@@ -884,10 +971,180 @@ public final class CadastroFornecedor extends javax.swing.JFrame {
             chamarInicial();
             dispose();
         }
+      
+    }
+    
+    void setEstados () {
+        Object[] items = estados;  
+        DefaultComboBoxModel model = new DefaultComboBoxModel(items);  
+        com_estados.setModel(model);  
+    
+        com_estados.setSelectedIndex(24);
+    }
+    
+    void limparCampos(){
+        //  Dados Empresa
+        tf_nome_fantasia.setText("");
+        tf_razao_social.setText("");
+        tf_cnpj.setText("");        
+        tf_inscricao_estadual.setText("");
+
+        //  Endereco e Contato
+        tf_rua.setText("");
+        tf_numero.setText("");
+        tf_bairro.setText("");
+        tf_cidade.setText("Caraguatatuba");
+        com_estados.setSelectedIndex(25);
+        tf_cep.setText("");
+        tf_telefone1.setText("");
+        tf_telefone2.setText("");
+        tf_celular.setText("");
+        tf_id_nextel.setText("");
+        tf_email.setText("");
+
+        // Data do dia
+        d.le_data();
+        String formato_data = d.getDia() + "/" + d.getMesNumber() + "/" + d.getAno();
+        tf_data_cadastro.setText(formato_data);
+        // Data do dia
+
+        //  Dados Bancarios
+
+        tf_banco1.setText("");
+        tf_banco2.setText("");
+        tf_banco3.setText("");
+
+        tf_agencia1.setText("");
+        tf_agencia2.setText("");
+        tf_agencia3.setText("");
+
+        tf_conta_corrente1.setText("");
+        tf_conta_corrente2.setText("");
+        tf_conta_corrente3.setText("");
+
+
+        // Contato vendedor
+        tf_nome_vendedor.setText("");
+        tf_id_nextel_vendedor.setText("");
+        tf_telefone_vendedor.setText("");
+        tf_email_vendedor.setText("");
+        ta_observacoes.setText("");
+    }
+    
+    void cadastrarFornecedor () {
+        //  Dados Empresa
+        String nome_fantasia     = tf_nome_fantasia.getText();
+        String razao_social      = tf_razao_social.getText();
+        String cnpj              = tf_cnpj.getText();        
+        String inscricao_estadual = tf_inscricao_estadual.getText();
+        
+        //  Endereco e Contato
+        String rua               = tf_rua.getText();
+        String numero            = tf_numero.getText();
+        String bairro            = tf_bairro.getText();
+        String cidade            = tf_cidade.getText();
+        int e                    = com_estados.getSelectedIndex();
+        String cep               = tf_cep.getText();
+        String telefone1         = tf_telefone1.getText();
+        String telefone2         = tf_telefone2.getText();
+        String celular           = tf_celular.getText();
+        String nextel            = tf_id_nextel.getText();
+        String email             = tf_email.getText();
+        String data_cadastro     = tf_data_cadastro.getText();
+        
+        //  Dados Bancarios
+        
+        String nome_banco1 = tf_banco1.getText();
+        String nome_banco2 = tf_banco2.getText();
+        String nome_banco3 = tf_banco3.getText();
+        
+        String agencia1 = tf_agencia1.getText();
+        String agencia2 = tf_agencia2.getText();
+        String agencia3 = tf_agencia3.getText();
+        
+        String conta_corrente1 = tf_conta_corrente1.getText();
+        String conta_corrente2 = tf_conta_corrente2.getText();
+        String conta_corrente3 = tf_conta_corrente3.getText();
+        
+        
+        // Contato vendedor
+        String nome_vendedor        = tf_nome_vendedor.getText();
+        String nextel_vendedor      = tf_id_nextel_vendedor.getText();
+        String telefone_vendedor    = tf_telefone_vendedor.getText();
+        String email_vendedor       = tf_email_vendedor.getText();
+        String observacao           = ta_observacoes.getText();
+        
+        String sql = "INSERT INTO fornecedor "
+                + "(for_CNPJ, for_razao_social, for_nome_fantasia, for_inscricao_estadual, for_rua, for_numero, for_bairro, for_cidade, for_estado, for_cep, for_email, for_telefone1, for_telefone2, for_celular, for_id_nextel, for_data_cadastro, for_nome_banco_1, for_agencia_1, for_conta_corrente_1, for_nome_banco_2, for_agencia_2, for_conta_corrente_2, for_nome_banco_3, for_agencia_3, for_conta_corrente_3, for_vendedor, for_telefone_vendedor, for_email_vendedor, for_observacoes) VALUES "
+                + "('"+cnpj+"','"+razao_social+"','"+nome_fantasia+"','"+inscricao_estadual+"','"+rua+"','"+numero+"','"+bairro+"','"+cidade+"','"+estados[e]+"','"+cep+"','"+email+"','"+telefone1+"','"+telefone2+"','"+celular+"','"+nextel+"','"+data_cadastro+"','"+nome_banco1+"','"+agencia1+"','"+conta_corrente1+"','"+nome_banco2+"','"+agencia2+"','"+conta_corrente2+"','"+nome_banco3+"','"+agencia3+"','"+conta_corrente3+"','"+nome_vendedor+"','"+telefone_vendedor+"','"+email_vendedor+"','"+observacao+"')";
+        
+        database.updateBase(sql);
+    }
+    
+    
+    void checarCampos(){
+        String nome   = tf_nome_fantasia.getText();
+        String cnpj   = tf_cnpj.getText();
+        
+        if(nome == null || nome.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Preencha o campo Nome Fantasia", "Invicta Code", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(cnpj == null || cnpj.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Preencha o campo CNPJ", "Invicta Code", JOptionPane.INFORMATION_MESSAGE);
+        }
         else
         {
-            chamarMesma();
-        }  
-      
-    }}
+            cadastrarFornecedor();
+        }
+    }
+    
+    void listarFornecedores () {
+        String sql = "SELECT for_id, for_nome_fantasia, for_cnpj, for_inscricao_estadual, for_telefone1, for_vendedor, for_telefone_vendedor FROM fornecedor";
+        
+        DefaultTableModel modelo = (DefaultTableModel) jt_fornecedor.getModel();
+        modelo.setNumRows(0);
+
+        
+        try 
+        {
+            ResultSet resultado = database.consultaTable(sql);
+            while (resultado.next()){
+                modelo.addRow(new Object[]{
+                    resultado.getInt("for_id"),
+                    resultado.getString("for_nome_fantasia"), 
+                    resultado.getString("for_cnpj"), 
+                    resultado.getString("for_inscricao_estadual"), 
+                    resultado.getString("for_telefone1"), 
+                    resultado.getString("for_vendedor"),
+                    resultado.getString("for_telefone_vendedor")
+                });
+            }
+                resultado.first();
+        } 
+        catch (SQLException erro) 
+        {
+            JOptionPane.showMessageDialog(null, "Erro ao listar a tabela " + erro);
+        }
+    }
+    
+    void excluirFornecedor (int codigo){
+        String sql = "DELETE FROM fornecedor WHERE for_id = '"+codigo+"'";
+        
+        int opcao = JOptionPane.showConfirmDialog
+        (null, "Deseja deletar este Fornecedor?", "Invicta Code", JOptionPane.INFORMATION_MESSAGE);
+        if(opcao == 0)
+        {
+            database.updateBase(sql);
+        }
+    }
+    
+     void limpaTabela() {
+        DefaultTableModel modelo = (DefaultTableModel) jt_fornecedor.getModel();
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+    }
+}
 

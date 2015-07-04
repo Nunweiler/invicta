@@ -616,8 +616,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_data_cadastroActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(maskDataCadastro);"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xd;&#xa;    maskDataCadastro= new MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;} catch (Exception e) {&#xd;&#xa;    System.err.println(&quot;Erro ao setar mascara&quot;);&#xd;&#xa;  }"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="//try {      maskDataCadastro= new MaskFormatter(&quot;##/##/####&quot;);  } catch (Exception e) {      System.err.println(&quot;Erro ao setar mascara&quot;);    }"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="la_porcentagem_desconto">

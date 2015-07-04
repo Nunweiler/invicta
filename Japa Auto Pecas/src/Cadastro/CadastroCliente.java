@@ -1,5 +1,6 @@
 package Cadastro;
 
+import Auxiliar.data;
 import Conexao.AcessoBD;
 import Gerenciamento.TelaInicial;
 import java.awt.Image;
@@ -27,6 +28,7 @@ public final class CadastroCliente extends javax.swing.JFrame {
     String seta_look = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
     AcessoBD database = new AcessoBD("japa");
     MaskFormatter maskDataNascimento, maskCNPJ, maskTel1, maskTel2, maskDataCadastro, maskPorcentagem, maskCEP, maskCPF, maskCel;
+    data d = new data();
     
     public CadastroCliente() throws ClassNotFoundException, ParseException {
         initComponents();
@@ -36,8 +38,13 @@ public final class CadastroCliente extends javax.swing.JFrame {
         listarClientes();
         tf_numero.setText(""+0);
         tf_limite_compras.setText(""+0);
+        
+        d.le_data();
+        
+        String formato_data = d.getDia() + "/" + d.getMesNumber() + "/" + d.getAno();
+        tf_data_cadastro.setText(formato_data);
     }
-
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,12 +138,8 @@ public final class CadastroCliente extends javax.swing.JFrame {
         la_ramo_atividade = new javax.swing.JLabel();
         com_atividades = new javax.swing.JComboBox();
         la_data_cadastro = new javax.swing.JLabel();
-        try {
-            maskDataCadastro= new MaskFormatter("##/##/####");
-        } catch (Exception e) {
-            System.err.println("Erro ao setar mascara");
-        }
-        tf_data_cadastro = new JFormattedTextField(maskDataCadastro);
+        //try {      maskDataCadastro= new MaskFormatter("##/##/####");  } catch (Exception e) {      System.err.println("Erro ao setar mascara");    }
+        tf_data_cadastro = new javax.swing.JTextField();
         la_porcentagem_desconto = new javax.swing.JLabel();
 
         try {
@@ -962,7 +965,14 @@ public final class CadastroCliente extends javax.swing.JFrame {
         tf_email.setText("");
 
         tf_responsavel_compras.setText("");
-        tf_data_cadastro.setText("");
+        
+        // Data do dia
+        d.le_data();
+        String formato_data = d.getDia() + "/" + d.getMesNumber() + "/" + d.getAno();
+        tf_data_cadastro.setText(formato_data);
+        // Data do dia
+        
+        
         tf_porcentagem_desconto.setText("");
         tf_limite_compras.setText("");
         ta_observacoes.setText("");
