@@ -12,12 +12,16 @@ public class data
     public SimpleDateFormat getHora_formatada() {
         return hora_formatada;
     }
-String mes, dia, ano, dia_semana, hora;
+String mes, dia, ano, dia_semana, hora, mesNumber;
 
     public String getMes() {
         return mes;
     }
-
+        
+    public String getMesNumber(){
+        return mesNumber;
+    }
+    
     public String getDia() {
         return dia;
     }
@@ -39,7 +43,7 @@ SimpleDateFormat hora_formatada = new SimpleDateFormat("HH:mm:ss");
     public void le_data()
     {
         Date data = new Date();
-     //   mes = ""+data.getMonth();
+        mesNumber = ""+(data.getMonth() + 1);
         dia = ""+data.getDate();
         ano = ""+(1900 + data.getYear());
     //    dia_semana = ""+data.getDay();

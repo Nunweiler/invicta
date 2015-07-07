@@ -31,12 +31,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="la_titulo1_dados_empresa" min="-2" pref="1102" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="la_titulo1_dados_empresa" pref="1265" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="la_titulo1_dados_empresa" min="-2" pref="610" max="-2" attributes="0"/>
+          <Component id="la_titulo1_dados_empresa" alignment="0" pref="633" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -60,12 +63,8 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="se_separador1" max="32767" attributes="0"/>
-                      </Group>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -102,6 +101,13 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="tf_email" max="32767" attributes="0"/>
                                       </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="bo_salvar" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="bo_limpar" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+                                          <Component id="bo_cancelar" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                       <Component id="la_titulo_informacoes" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="la_titulo" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -109,6 +115,7 @@
                                       <Component id="se_separador3" alignment="0" min="-2" pref="546" max="-2" attributes="0"/>
                                       <Component id="se_separador4" alignment="0" min="-2" pref="546" max="-2" attributes="0"/>
                                       <Component id="la_titulo_observacoes" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="sp_painel_rolagem" alignment="0" min="-2" pref="546" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                               <Group type="102" attributes="0">
@@ -200,20 +207,6 @@
                                           </Group>
                                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="sp_painel_rolagem" min="-2" pref="546" max="-2" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="bo_salvar" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="bo_cancelar" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="bo_limpar" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="196" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                      </Group>
                                   </Group>
                               </Group>
                               <Component id="se_separador2" alignment="0" min="-2" pref="556" max="-2" attributes="0"/>
@@ -223,32 +216,34 @@
                               </Group>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="tf_campo_pesquisa" min="-2" pref="127" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="bo_filtro_nome" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jScrollPane1" min="-2" pref="510" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="bo_atualizar" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                      <Component id="bo_editar_cliente" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="148" max="32767" attributes="0"/>
+                                  <Component id="tf_campo_pesquisa" min="-2" pref="194" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="bo_filtro_nome" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="bo_editar_cliente" alignment="0" pref="300" max="32767" attributes="0"/>
+                                      <Component id="bo_atualizar" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="bo_excluir_cliente" max="32767" attributes="0"/>
-                                      <Component id="bo_consulta_completa" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Component id="bo_consulta_completa" pref="300" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="se_separador1" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -268,8 +263,7 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" min="-2" pref="354" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="la_nome" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="tf_nome" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -347,28 +341,29 @@
                               <Component id="la_limite_compras" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="tf_limite_compras" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="se_separador4" min="-2" pref="10" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jScrollPane1" alignment="0" min="-2" pref="354" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="la_titulo_observacoes" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="bo_excluir_cliente" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="bo_editar_cliente" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="bo_editar_cliente" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="bo_excluir_cliente" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="bo_consulta_completa" alignment="0" max="32767" attributes="0"/>
-                              <Component id="bo_atualizar" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="bo_atualizar" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="bo_consulta_completa" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="sp_painel_rolagem" min="-2" pref="96" max="-2" attributes="0"/>
+                          <Component id="la_titulo_observacoes" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
+                          <Component id="sp_painel_rolagem" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="bo_salvar" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="bo_limpar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -621,8 +616,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_data_cadastroActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(maskDataCadastro);"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xd;&#xa;    maskDataCadastro= new MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;} catch (Exception e) {&#xd;&#xa;    System.err.println(&quot;Erro ao setar mascara&quot;);&#xd;&#xa;  }"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="//try {      maskDataCadastro= new MaskFormatter(&quot;##/##/####&quot;);  } catch (Exception e) {      System.err.println(&quot;Erro ao setar mascara&quot;);    }"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="la_porcentagem_desconto">
@@ -816,7 +810,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Consulta Completa Clientes"/>
+            <Property name="text" type="java.lang.String" value="Consultar Todos os Dados do Cliente"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bo_consulta_completaActionPerformed"/>
